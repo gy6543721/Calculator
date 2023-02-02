@@ -1,6 +1,5 @@
 package levilin.calculator.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import levilin.calculator.model.CalculatorAction
@@ -44,11 +43,11 @@ class SharedViewModel: ViewModel() {
     }
 
     private fun inputDecimal() {
-        if (state.operation == null && !state.number1.contains(".") && state.number1.isNotBlank()) {
+        if (state.operation == null && !state.number1.contains(".") && state.number1.contains("[0-9]".toRegex())) {
             state = state.copy(number1 = state.number1 + ConstantValue.DECIMAL_BUTTON)
             return
         }
-        if (!state.number2.contains(".") && state.number2.isNotBlank()) {
+        if (!state.number2.contains(".") && state.number2.contains("[0-9]".toRegex())) {
             state = state.copy(number2 = state.number2 + ConstantValue.DECIMAL_BUTTON)
         }
     }
@@ -59,8 +58,8 @@ class SharedViewModel: ViewModel() {
                 "" -> state.copy(number1 = ConstantValue.MINUS_BUTTON)
                 "-" -> state.copy(number1 = "")
                 else -> {
-                    val number1ToDouble = state.number1.toDouble()
-                    val number1ChangedValue = changeSign(number1ToDouble)
+                    val number1ToBigDecimal = BigDecimal(state.number1)
+                    val number1ChangedValue = changeSign(number1ToBigDecimal)
                     state.copy(number1 = number1ChangedValue)
                 }
             }
@@ -69,8 +68,8 @@ class SharedViewModel: ViewModel() {
                 "" -> state.copy(number2 = ConstantValue.MINUS_BUTTON)
                 "-" -> state.copy(number2 = "")
                 else -> {
-                    val number2ToDouble = state.number2.toDouble()
-                    val number2ChangedValue = changeSign(number2ToDouble)
+                    val number2ToBigDecimal = BigDecimal(state.number2)
+                    val number2ChangedValue = changeSign(number2ToBigDecimal)
                     state.copy(number2 = number2ChangedValue)
                 }
             }
@@ -87,8 +86,6 @@ class SharedViewModel: ViewModel() {
         if (state.number1.contains("[0-9]".toRegex()) && state.number2.contains("[0-9]".toRegex())) {
             val number1ToBigDecimal = BigDecimal(state.number1)
             val number2ToBigDecimal = BigDecimal(state.number2)
-//            Log.d("TAG", "number1ToDouble:$number1ToBigDecimal")
-//            Log.d("TAG", "number2ToDouble:$number2ToBigDecimal")
 
             val result = when(state.operation) {
                 is CalculatorOperation.Add -> number1ToBigDecimal.add(number2ToBigDecimal)
@@ -100,7 +97,7 @@ class SharedViewModel: ViewModel() {
 
             // Update state
             state = state.copy(
-                number1 = formattedResult(result.toDouble()),
+                number1 = result.stripTrailingZeros().toString(),
                 number2 = "",
                 operation = null
             )
@@ -116,38 +113,8 @@ class SharedViewModel: ViewModel() {
         }
     }
 
-    private fun changeSign(value: Double): String {
-        return if (value % 1 != 0.0) {
-            (value * -1).toString()
-        } else {
-            val str = (value * -1).toString()
-            if (str.contains("E")) {
-                str
-            } else {
-                val delimiter = "."
-                val parts = str.split(delimiter)
-                parts[0]
-            }
-        }
-    }
-
-    private fun formattedResult(value: Double): String {
-        val str = value.toString()
-        val delimiter = "."
-        val parts = str.split(delimiter)
-
-        return if (value % 1 != 0.0) {
-            if (parts[1].length > 3 && !str.contains("E")) {
-                "%.3f".format(value)
-            } else {
-                str
-            }
-        } else {
-            if (str.contains("E")) {
-                str
-            } else {
-                parts[0]
-            }
-        }
+    private fun changeSign(value: BigDecimal): String {
+        val minusOne = BigDecimal(-1)
+        return (value.multiply(minusOne)).stripTrailingZeros().toString()
     }
 }
