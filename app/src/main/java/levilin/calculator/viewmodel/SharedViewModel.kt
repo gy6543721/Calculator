@@ -86,16 +86,15 @@ class SharedViewModel: ViewModel() {
     private fun performCalculate() {
         if (state.number1.contains("[0-9]".toRegex()) && state.number2.contains("[0-9]".toRegex())) {
             val number1ToBigDecimal = BigDecimal(state.number1)
-            Log.d("TAG", "number1ToDouble:$number1ToBigDecimal")
-
             val number2ToBigDecimal = BigDecimal(state.number2)
-            Log.d("TAG", "number2ToDouble:$number2ToBigDecimal")
+//            Log.d("TAG", "number1ToDouble:$number1ToBigDecimal")
+//            Log.d("TAG", "number2ToDouble:$number2ToBigDecimal")
 
             val result = when(state.operation) {
                 is CalculatorOperation.Add -> number1ToBigDecimal.add(number2ToBigDecimal)
                 is CalculatorOperation.Minus -> number1ToBigDecimal.subtract(number2ToBigDecimal)
                 is CalculatorOperation.Multiply -> number1ToBigDecimal.multiply(number2ToBigDecimal)
-                is CalculatorOperation.Divide -> number1ToBigDecimal.divide(number2ToBigDecimal, 3, BigDecimal.ROUND_HALF_UP)
+                is CalculatorOperation.Divide -> number1ToBigDecimal.divide(number2ToBigDecimal, ConstantValue.DECIMAL_LENGTH, BigDecimal.ROUND_HALF_UP)
                 null -> return
             }
 
