@@ -7,6 +7,7 @@ import levilin.calculator.model.CalculatorAction
 import levilin.calculator.model.CalculatorOperation
 import levilin.calculator.model.CalculatorState
 import levilin.calculator.utility.ConstantValue
+import java.math.BigDecimal
 
 class SharedViewModel: ViewModel() {
     var state by mutableStateOf(CalculatorState())
@@ -83,24 +84,24 @@ class SharedViewModel: ViewModel() {
     }
 
     private fun performCalculate() {
-        val number1ToDouble = state.number1.toDoubleOrNull()
-        Log.d("TAG", "number1ToDouble:" + number1ToDouble.toString())
+        if (state.number1.contains("[0-9]".toRegex()) && state.number2.contains("[0-9]".toRegex())) {
+            val number1ToBigDecimal = BigDecimal(state.number1)
+            Log.d("TAG", "number1ToDouble:$number1ToBigDecimal")
 
-        val number2ToDouble = state.number2.toDoubleOrNull()
-        Log.d("TAG", "number2ToDouble:" + number2ToDouble.toString())
+            val number2ToBigDecimal = BigDecimal(state.number2)
+            Log.d("TAG", "number2ToDouble:$number2ToBigDecimal")
 
-        if (number1ToDouble != null && number2ToDouble != null) {
             val result = when(state.operation) {
-                is CalculatorOperation.Add -> number1ToDouble + number2ToDouble
-                is CalculatorOperation.Minus -> number1ToDouble - number2ToDouble
-                is CalculatorOperation.Multiply -> number1ToDouble * number2ToDouble
-                is CalculatorOperation.Divide -> number1ToDouble / number2ToDouble
+                is CalculatorOperation.Add -> number1ToBigDecimal.add(number2ToBigDecimal)
+                is CalculatorOperation.Minus -> number1ToBigDecimal.subtract(number2ToBigDecimal)
+                is CalculatorOperation.Multiply -> number1ToBigDecimal.multiply(number2ToBigDecimal)
+                is CalculatorOperation.Divide -> number1ToBigDecimal.divide(number2ToBigDecimal, 3, BigDecimal.ROUND_HALF_UP)
                 null -> return
             }
 
             // Update state
             state = state.copy(
-                number1 = formattedResult(result),
+                number1 = formattedResult(result.toDouble()),
                 number2 = "",
                 operation = null
             )
@@ -109,9 +110,10 @@ class SharedViewModel: ViewModel() {
 
     private fun performDeletion() {
         when {
-            state.number1.isNotBlank() -> state = state.copy(number1 = state.number1.dropLast(1))
-            state.number2.isNotBlank() -> state = state.copy(number2 = state.number2.dropLast(1))
+            // Delete number2 first, then operation symbol, then number1
+            state.number2.isNotEmpty() -> state = state.copy(number2 = state.number2.dropLast(1))
             state.operation != null -> state = state.copy(operation = null)
+            state.number1.isNotEmpty() -> state = state.copy(number1 = state.number1.dropLast(1))
         }
     }
 

@@ -272,7 +272,7 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                         .aspectRatio(2f)
                         .weight(2f),
                     onClick = {
-                        onAction(CalculatorAction.Number(1))
+                        onAction(CalculatorAction.Number(0))
                     }
                 )
 

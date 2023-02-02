@@ -7,7 +7,7 @@ class ConstantValue {
     companion object {
         const val ADD_BUTTON = "+"
         const val MINUS_BUTTON = "-"
-        const val MULTIPLY_BUTTON = "x"
+        const val MULTIPLY_BUTTON = "×"
         const val DIVIDE_BUTTON = "÷"
         const val ALL_CLEAR_BUTTON = "AC"
         const val SIGN_BUTTON = "±"
