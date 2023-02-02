@@ -59,8 +59,8 @@ class SharedViewModel: ViewModel() {
                 "-" -> state.copy(number1 = "")
                 else -> {
                     val number1ToDouble = state.number1.toDouble()
-                    val changedValue = changeSign(number1ToDouble)
-                    state.copy(number1 = changedValue)
+                    val number1ChangedValue = changeSign(number1ToDouble)
+                    state.copy(number1 = number1ChangedValue)
                 }
             }
         } else {
@@ -69,8 +69,8 @@ class SharedViewModel: ViewModel() {
                 "-" -> state.copy(number2 = "")
                 else -> {
                     val number2ToDouble = state.number2.toDouble()
-                    val changedValue = changeSign(number2ToDouble)
-                    state.copy(number2 = changedValue)
+                    val number2ChangedValue = changeSign(number2ToDouble)
+                    state.copy(number2 = number2ChangedValue)
                 }
             }
         }
@@ -119,15 +119,34 @@ class SharedViewModel: ViewModel() {
         return if (value % 1 != 0.0) {
             (value * -1).toString()
         } else {
-            (value * -1).toInt().toString()
+            val str = (value * -1).toString()
+            if (str.contains("E")) {
+                str
+            } else {
+                val delimiter = "."
+                val parts = str.split(delimiter)
+                parts[0]
+            }
         }
     }
 
     private fun formattedResult(value: Double): String {
+        val str = value.toString()
+        val delimiter = "."
+        val parts = str.split(delimiter)
+
         return if (value % 1 != 0.0) {
-            "%.3f".format(value)
+            if (parts[1].length > 3 && !str.contains("E")) {
+                "%.3f".format(value)
+            } else {
+                str
+            }
         } else {
-            value.toInt().toString()
+            if (str.contains("E")) {
+                str
+            } else {
+                parts[0]
+            }
         }
     }
 }

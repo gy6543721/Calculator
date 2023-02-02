@@ -15,7 +15,7 @@ class ConstantValue {
         const val EQUAL_BUTTON = "="
         const val DECIMAL_BUTTON = "."
 
-        const val MAX_INPUT_LENGTH = 12
+        const val MAX_INPUT_LENGTH = 10
         const val TEXT_SCALE_REDUCTION_INTERVAL = 0.9f
 
         const val ONE = "1"

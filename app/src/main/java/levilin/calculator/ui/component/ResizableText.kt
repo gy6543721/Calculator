@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import levilin.calculator.ui.theme.screenTextColor
 import levilin.calculator.utility.ConstantValue
+import levilin.calculator.viewmodel.SharedViewModel
 
 @Composable
 fun ResizableText(
@@ -20,7 +21,7 @@ fun ResizableText(
     textAlign: TextAlign = TextAlign.Center,
     textStyle: TextStyle,
     targetTextSize: TextUnit = textStyle.fontSize,
-    maxLines: Int = 1,
+    maxLines: Int = 1
 ) {
     var textSize by remember { mutableStateOf(targetTextSize) }
 
@@ -37,10 +38,15 @@ fun ResizableText(
         maxLines = maxLines,
         overflow = TextOverflow.Ellipsis,
         onTextLayout = { textLayoutResult ->
+            // Resize textSize
             val maxCurrentLineIndex: Int = textLayoutResult.lineCount - 1
-
             if (textLayoutResult.isLineEllipsized(maxCurrentLineIndex)) {
                 textSize = textSize.times(ConstantValue.TEXT_SCALE_REDUCTION_INTERVAL)
+            }
+
+            // Resize textSize to default if content is cleared
+            if (text.isBlank() || text == "") {
+                textSize = textStyle.fontSize
             }
         }
     )

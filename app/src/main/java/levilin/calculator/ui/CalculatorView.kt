@@ -29,18 +29,6 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
         ) {
 
             // Result Panel
-//            Text(
-//                text = state.number1 + (state.operation?.symbol ?: "") + state.number2,
-//                textAlign = TextAlign.End,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(ConstantValue.TEXT_PADDING),
-//                fontWeight = FontWeight.Light,
-//                fontSize = ConstantValue.TEXT_FONT_SIZE,
-//                color = MaterialTheme.colors.screenTextColor,
-//                maxLines = 2
-//            )
-
             ResizableText(
                 text = state.number1 + (state.operation?.symbol ?: "") + state.number2,
                 textAlign = TextAlign.End,
@@ -49,9 +37,9 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     .padding(ConstantValue.TEXT_PADDING),
                 textStyle = TextStyle(
                     fontWeight = FontWeight.Light,
+                    fontSize = ConstantValue.TEXT_FONT_SIZE,
                     color = MaterialTheme.colors.screenTextColor
                 ),
-                targetTextSize = ConstantValue.TEXT_FONT_SIZE,
                 maxLines = 1
             )
 
