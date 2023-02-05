@@ -97,7 +97,7 @@ class SharedViewModel: ViewModel() {
 
             // Update state
             state = state.copy(
-                number1 = result.stripTrailingZeros().toString(),
+                number1 = result.stripTrailingZeros().toPlainString(),
                 number2 = "",
                 operation = null
             )
@@ -115,6 +115,6 @@ class SharedViewModel: ViewModel() {
 
     private fun changeSign(value: BigDecimal): String {
         val minusOne = BigDecimal(-1)
-        return (value.multiply(minusOne)).stripTrailingZeros().toString()
+        return (value.multiply(minusOne)).stripTrailingZeros().toPlainString()
     }
 }
