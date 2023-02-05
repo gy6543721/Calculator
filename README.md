@@ -1,6 +1,7 @@
 # Calculator Compose
 Native Android Application written in Kotlin with Jetpack Compose.  
 Implement with MVVM structure, support Dark Mode.  
+[Google Play Store](https://play.google.com/store/apps/details?id=levilin.calculator)  
 [Demo Video](https://youtu.be/0bS521RH5P0)  
 <br>
 
