@@ -91,7 +91,13 @@ class SharedViewModel: ViewModel() {
                 is CalculatorOperation.Add -> number1ToBigDecimal.add(number2ToBigDecimal)
                 is CalculatorOperation.Minus -> number1ToBigDecimal.subtract(number2ToBigDecimal)
                 is CalculatorOperation.Multiply -> number1ToBigDecimal.multiply(number2ToBigDecimal)
-                is CalculatorOperation.Divide -> number1ToBigDecimal.divide(number2ToBigDecimal, ConstantValue.DECIMAL_LENGTH, BigDecimal.ROUND_HALF_UP)
+                is CalculatorOperation.Divide -> {
+                    if (number2ToBigDecimal != BigDecimal(0)) {
+                        number1ToBigDecimal.divide(number2ToBigDecimal, ConstantValue.DECIMAL_LENGTH, BigDecimal.ROUND_HALF_UP)
+                    } else {
+                        return
+                    }
+                }
                 null -> return
             }
 
