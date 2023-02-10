@@ -77,7 +77,7 @@ class SharedViewModel: ViewModel() {
     }
 
     private fun inputOperation(operation: CalculatorOperation) {
-        if (state.number1.isNotBlank()) {
+        if (state.number1.contains("[0-9]".toRegex())) {
             state = state.copy(operation = operation)
         }
     }
