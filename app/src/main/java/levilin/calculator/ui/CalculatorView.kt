@@ -6,9 +6,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import levilin.calculator.R
 import levilin.calculator.model.CalculatorAction
 import levilin.calculator.model.CalculatorOperation
 import levilin.calculator.model.CalculatorState
@@ -34,7 +37,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(ConstantValue.TEXT_PADDING),
+                    .padding(ConstantValue.TEXT_PADDING)
+                    .testTag(stringResource(id = R.string.result_panel)),
                 textStyle = TextStyle(
                     fontWeight = FontWeight.Light,
                     fontSize = ConstantValue.TEXT_FONT_SIZE,
@@ -54,7 +58,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.otherButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_ac)),
                     onClick = {
                         onAction(CalculatorAction.Clear)
                     }
@@ -66,7 +71,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.otherButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_sign)),
                     onClick = {
                         onAction(CalculatorAction.Sign)
                     }
@@ -78,7 +84,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.otherButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_delete)),
                     onClick = {
                         onAction(CalculatorAction.Delete)
                     }
@@ -90,7 +97,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.operationButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_divide)),
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Divide))
                     }
@@ -108,7 +116,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_seven)),
                     onClick = {
                         onAction(CalculatorAction.Number(7))
                     }
@@ -120,7 +129,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_eight)),
                     onClick = {
                         onAction(CalculatorAction.Number(8))
                     }
@@ -132,7 +142,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_nine)),
                     onClick = {
                         onAction(CalculatorAction.Number(9))
                     }
@@ -144,7 +155,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.operationButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_multiply)),
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Multiply))
                     }
@@ -162,7 +174,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_four)),
                     onClick = {
                         onAction(CalculatorAction.Number(4))
                     }
@@ -174,7 +187,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_five)),
                     onClick = {
                         onAction(CalculatorAction.Number(5))
                     }
@@ -186,7 +200,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_six)),
                     onClick = {
                         onAction(CalculatorAction.Number(6))
                     }
@@ -198,7 +213,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.operationButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_minus)),
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Minus))
                     }
@@ -216,7 +232,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_one)),
                     onClick = {
                         onAction(CalculatorAction.Number(1))
                     }
@@ -228,7 +245,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_two)),
                     onClick = {
                         onAction(CalculatorAction.Number(2))
                     }
@@ -240,7 +258,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_three)),
                     onClick = {
                         onAction(CalculatorAction.Number(3))
                     }
@@ -252,7 +271,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.operationButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_add)),
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Add))
                     }
@@ -270,7 +290,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.numberButtonBackgroundColor)
                         .aspectRatio(2f)
-                        .weight(2f),
+                        .weight(2f)
+                        .testTag(stringResource(id = R.string.button_zero)),
                     onClick = {
                         onAction(CalculatorAction.Number(0))
                     }
@@ -282,7 +303,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.operationButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_decimal)),
                     onClick = {
                         onAction(CalculatorAction.Decimal)
                     }
@@ -294,7 +316,8 @@ fun CalculatorView(state: CalculatorState, modifier: Modifier = Modifier, onActi
                     modifier = Modifier
                         .background(color = MaterialTheme.colors.operationButtonBackgroundColor)
                         .aspectRatio(1f)
-                        .weight(1f),
+                        .weight(1f)
+                        .testTag(stringResource(id = R.string.button_equal)),
                     onClick = {
                         onAction(CalculatorAction.Calculate)
                     }

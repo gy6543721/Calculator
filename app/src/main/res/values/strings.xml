@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Calculator</string>
+
+    // Unit Test
+    <string name="result_panel">Result Panel</string>
+    <string name="button_ac">Button AC</string>
+    <string name="button_sign">Button Sign</string>
+    <string name="button_delete">Button Delete</string>
+    <string name="button_add">Button Add</string>
+    <string name="button_minus">Button Minus</string>
+    <string name="button_multiply">Button Multiply</string>
+    <string name="button_divide">Button Divide</string>
+    <string name="button_one">Button One</string>
+    <string name="button_two">Button Two</string>
+    <string name="button_three">Button Three</string>
+    <string name="button_four">Button Four</string>
+    <string name="button_five">Button Five</string>
+    <string name="button_six">Button Six</string>
+    <string name="button_seven">Button Seven</string>
+    <string name="button_eight">Button Eight</string>
+    <string name="button_nine">Button Nine</string>
+    <string name="button_zero">Button Zero</string>
+    <string name="button_decimal">Button Decimal</string>
+    <string name="button_equal">Button Equal</string>
 </resources>

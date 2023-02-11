@@ -21,11 +21,10 @@ class MainActivity : ComponentActivity() {
 
                 val viewModel = viewModel<SharedViewModel>()
                 val state = viewModel.state
-                val calculatorPadding = ConstantValue.CALCULATOR_PADDING
 
                 CalculatorView(
                     state = state,
-                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.screenBackgroundColor).padding(calculatorPadding),
+                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.screenBackgroundColor).padding(ConstantValue.CALCULATOR_PADDING),
                     onAction = viewModel::onAction
                 )
 
