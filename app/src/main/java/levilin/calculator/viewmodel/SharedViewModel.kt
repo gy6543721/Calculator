@@ -7,6 +7,8 @@ import levilin.calculator.model.CalculatorOperation
 import levilin.calculator.model.CalculatorState
 import levilin.calculator.utility.ConstantValue
 import java.math.BigDecimal
+import java.math.MathContext
+import java.math.RoundingMode
 
 class SharedViewModel: ViewModel() {
     var state by mutableStateOf(CalculatorState())
@@ -93,7 +95,7 @@ class SharedViewModel: ViewModel() {
                 is CalculatorOperation.Multiply -> number1ToBigDecimal.multiply(number2ToBigDecimal)
                 is CalculatorOperation.Divide -> {
                     if (number2ToBigDecimal != BigDecimal(0)) {
-                        number1ToBigDecimal.divide(number2ToBigDecimal, ConstantValue.DECIMAL_LENGTH, BigDecimal.ROUND_HALF_UP)
+                        number1ToBigDecimal.divide(number2ToBigDecimal, MathContext(ConstantValue.DECIMAL_LENGTH, RoundingMode.HALF_UP))
                     } else {
                         return
                     }
