@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
                 CalculatorView(
                     state = state,
-                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.screenBackgroundColor).padding(ConstantValue.CALCULATOR_PADDING),
+                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.screenBackgroundColor).padding(ConstantValue.CALCULATOR_PADDING).statusBarsPadding().navigationBarsPadding(),
                     onAction = viewModel::onAction
                 )
 
